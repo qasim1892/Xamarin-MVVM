@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:XamarinMvvm.ViewModels" 
+             x:Class="XamarinMvvm.MainPage"
+             Title="Product List">
+
+
+    <ContentPage.BindingContext>
+        <viewmodels:ProductViewModel/>
+    </ContentPage.BindingContext>
+    <ListView ItemsSource="{Binding Products}" SeparatorVisibility="None"
+                  Grid.Row="3" Margin="20,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ListView.ItemTemplate>
+            <DataTemplate >
+                <ViewCell>
+                    <Frame BackgroundColor="White" BorderColor="#F0F0F0" Padding="5" Margin="5,5,5,5" HasShadow="False">
+                        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Title}" TextColor="#757575" FontSize="12" VerticalOptions="Center" Margin="20,0"/>
+                            <Image Grid.Column="1" Source="{Binding Thumbnail}" WidthRequest="38" HeightRequest="38" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <StackLayout Grid.Column="2" Orientation="Horizontal" Margin="20,0" HorizontalOptions="End" VerticalOptions="Center">
+                                <Label Text="{Binding Description}" TextColor="Black" FontSize="30" FontAttributes="Bold" VerticalOptions="Center"/>
+                                <Label Text="°C" TextColor="Black" FontSize="15" VerticalOptions="Center"/>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
