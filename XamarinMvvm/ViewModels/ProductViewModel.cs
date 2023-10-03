@@ -11,6 +11,19 @@ namespace XamarinMvvm.ViewModels
     public class ProductViewModel : INotifyPropertyChanged
 
     {
+        private bool isProgressBarVisible;
+        public bool IsProgressBarVisible
+        {
+            get { return isProgressBarVisible; }
+            set
+            {
+                if (isProgressBarVisible != value)
+                {
+                    isProgressBarVisible = value;
+                    OnPropertyChanged(nameof(IsProgressBarVisible)); // Implement INotifyPropertyChanged
+                }
+            }
+        }
         private readonly ProductRepository _productRepository;
 
         private List<ProductsResponse> _products;
@@ -34,7 +47,9 @@ namespace XamarinMvvm.ViewModels
 
         public async Task LoadDataAsync()
         {
+            IsProgressBarVisible = true; // Show ProgressBar
             Products = await _productRepository.GetProductsAsync();
+            IsProgressBarVisible = false; // Hide ProgressBar when done
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
